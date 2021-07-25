@@ -1,0 +1,72 @@
+version: '3'
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes: 
+      - .:/app
+    ports: 
+      - "3000:3000"
+    depends_on: 
+      - db
+#   app:
+#     build:
+#       context: .
+#     command: bundle exec puma -C config/puma.rb
+
+#     volumes:
+#       - .:/react-rails-aws
+#       - public-data:/react-rails-aws/public
+#       - tmp-data:/react-rails-aws/tmp
+#       - log-data:/react-rails-aws/log
+#     ports: 
+#       - "3000:3000"
+#     networks:
+#       - react-rails-aws-network
+#     depends_on:
+#       - db
+
+#   db:
+#     platform: Linux/x86_64
+#     image: mysql:5.7
+#     environment:
+#       MYSQL_ROOT_PASSWORD: password
+#       MYSQL_USER: user
+#       MYSQL_PASSWORD: password
+#       MYSQL_DATABASE: react-rails-aws_development
+#     volumes:
+#       - db-data:/var/lib/mysql
+#     networks:
+#       - react-rails-aws-network
+#     ports: 
+#       - "3306:3306"
+
+#   web:
+#     build:
+#       context: ./nginx_docker
+#     volumes:
+#       - public-data:/react-rails-aws/public
+#       - tmp-data:/react-rails-aws/tmp
+#     ports:
+#       - 80:80
+#     depends_on:
+#       - app
+#     networks:
+#       - react-rails-aws-network
+
+# volumes:
+#   public-data:
+#   tmp-data:
+#   log-data:
+#   db-data:
+
+# networks:
+#   react-rails-aws-network:
+#     external: true
