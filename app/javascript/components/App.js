@@ -5,7 +5,7 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <div>
-          こんにちわ  ddddddddddddddd
+          成功しましたいいいいいいいいい
         </div>        
       </React.Fragment>
     );
