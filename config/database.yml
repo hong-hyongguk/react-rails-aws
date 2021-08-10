@@ -52,5 +52,6 @@ test:
 production:
   <<: *default
   database: react_rails_aws_production
-  username: react_rails_aws
-  password: <%= ENV['REACT_RAILS_AWS_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.credentials.db[:username] %>
+  password: <%= Rails.application.credentials.db[:password] %>
+  socket: <%= Rails.application.credentials.db[:socket] %>
